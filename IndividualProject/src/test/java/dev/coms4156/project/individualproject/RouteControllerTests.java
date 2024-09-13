@@ -1,6 +1,5 @@
 package dev.coms4156.project.individualproject;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
@@ -25,6 +24,15 @@ public class RouteControllerTests {
     testRouteController = new RouteController();
     testDepartments = testFileDatabase.getDepartmentMapping();
     testDepartment = testDepartments.get("COMS");
+  }
+
+  @Test
+  public void indexTest() {
+    String expected = "Welcome, in order to make an API call direct your browser or Postman to an endpoint "
+        + "\n\n This can be done using the following format: \n\n http:127.0.0"
+        + ".1:8080/endpoint?arg=value";
+
+    assertEquals(expected, testRouteController.index());
   }
 
   @Test
@@ -65,6 +73,13 @@ public class RouteControllerTests {
   }
 
   @Test
+  public void findCourseLocationTest() {
+    ResponseEntity<?> res = testRouteController.findCourseLocation("COMS", 1004);
+    HttpStatusCode status = res.getStatusCode();
+    assertEquals(HttpStatus.OK, status);
+  }
+
+  @Test
   public void findCourseInstructorTest() {
     ResponseEntity<?> res = testRouteController.findCourseInstructor("COMS", 1004);
     HttpStatusCode status = res.getStatusCode();
@@ -97,6 +112,10 @@ public class RouteControllerTests {
     ResponseEntity<?> res = testRouteController.dropStudent("COMS", 1004);
     HttpStatusCode status = res.getStatusCode();
     assertEquals(HttpStatus.OK, status);
+
+    String actual = res.getBody().toString();
+    String expected = "Student has been dropped.";
+    assertEquals(expected, actual);
   }
 
   @Test
