@@ -1,0 +1,42 @@
+Course Class Bugs -
+
+1. enrollStudent -- Added if statement to enrollStudent to prevent student being enrolled if course if full
+
+2. dropStudent -- Added if statement to dropStudent to prevent student from being drop if no current students are enrolled
+
+3. getCourseLocation and getInstructorName -- swapped the return statements in these two functions for them to output the correct attribute
+
+4. MissingOverride:
+line 98
+Added @Override to the overridden toString statement
+
+
+Department Class Bugs -
+
+1. LooseCoupling:
+line: 24, 55, 119
+Used interface Map instead of the HashMap
+
+2. MissingOverride:
+line 106
+Added @Override to the overridden toString statement
+
+3. unusedPrivateField:
+line 120, 47
+Removed unecessary parentheses from return statement
+
+4. unecessaryImport:
+Line 5
+Removed unused HashMap import
+
+5. line 114
+Fixed the return statement
+
+
+IndividualProjectApplication Class Bugs -
+
+1. LiteralsFirstInComparisons:
+line 39
+Swapped the position of the literals
+
+
