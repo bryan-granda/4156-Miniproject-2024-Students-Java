@@ -1,6 +1,9 @@
 package dev.coms4156.project.individualproject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +24,26 @@ public class CourseUnitTests {
 
   @Test
   public void enrollStudentTest() {
-    assertEquals(true, testCourse.enrollStudent());
+    assertTrue(testCourse.enrollStudent());
+  }
+
+
+  @Test
+  public void enrollStudentFalseTest() {
+    testCourse.setEnrolledStudentCount(0);
+    assertFalse(testCourse.enrollStudent());
   }
 
   @Test
   public void dropStudentTest() {
     assertEquals(true, testCourse.dropStudent());
+  }
+
+  @Test
+  public void cannotDropStudentTest() {
+    testCourse.setEnrolledStudentCount(0);
+
+    assertFalse(testCourse.dropStudent());
   }
 
   @Test
@@ -76,7 +93,14 @@ public class CourseUnitTests {
 
   @Test
   public void isCourseFullTest() {
-    assertEquals(false, testCourse.isCourseFull());
+    assertFalse(testCourse.isCourseFull());
+  }
+
+  @Test
+  public void isCourseFullFalseTest() {
+    testCourse.setEnrolledStudentCount(0);
+
+    assertTrue(testCourse.isCourseFull());
   }
 
 
