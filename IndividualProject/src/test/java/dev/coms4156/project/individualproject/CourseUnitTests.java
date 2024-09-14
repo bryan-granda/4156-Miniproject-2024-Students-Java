@@ -2,7 +2,6 @@ package dev.coms4156.project.individualproject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,9 +16,12 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration
 public class CourseUnitTests {
 
+  /**
+   * Instances a Course object for each test that is ran.
+   */
   @BeforeEach
   public void setupCourseForTesting() {
-    testCourse = new Course("Griffin Newbold", "417 IAB", "11:40-12:55", 250);
+    testCourse = new Course("Griffin Newbold", "417 IAB", "11:40-12:55", 1000);
   }
 
   @Test
@@ -30,7 +32,7 @@ public class CourseUnitTests {
 
   @Test
   public void enrollStudentFalseTest() {
-    testCourse.setEnrolledStudentCount(0);
+    testCourse.setEnrolledStudentCount(1000);
     assertFalse(testCourse.enrollStudent());
   }
 
@@ -98,12 +100,12 @@ public class CourseUnitTests {
 
   @Test
   public void isCourseFullFalseTest() {
-    testCourse.setEnrolledStudentCount(0);
+    testCourse.setEnrolledStudentCount(1000);
 
     assertTrue(testCourse.isCourseFull());
   }
 
 
   /** The test course instance used for testing. */
-  public static Course testCourse;
+  public Course testCourse;
 }

@@ -3,6 +3,7 @@ package dev.coms4156.project.individualproject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,10 +19,15 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration
 public class MyFileDatabaseTests {
 
+  /**
+ * Instances a test Department and Database file object to use for testing.
+ */
   @BeforeAll
   public static void dataBaseSetupTest() {
+    testDatabase = new MyFileDatabase(0, "./data.txt");
+    assertNotNull(testDatabase);
 
-  String[] times = { "11:40-12:55", "4:10-5:25", "10:10-11:25", "2:40-3:55" };
+    String[] times = { "11:40-12:55", "4:10-5:25", "10:10-11:25", "2:40-3:55" };
     String[] locations = { "417 IAB", "309 HAV", "301 URIS" };
 
     // data for coms dept
@@ -41,7 +47,7 @@ public class MyFileDatabaseTests {
     coms3827.setEnrolledStudentCount(283);
     Course coms4156 = new Course("Gail Kaiser", "501 NWC", times[2], 120);
     coms4156.setEnrolledStudentCount(109);
-    HashMap<String, Course> courses = new HashMap<>();
+    Map<String, Course> courses = new HashMap<>();
     courses.put("1004", coms1004);
     courses.put("3134", coms3134);
     courses.put("3157", coms3157);
@@ -53,10 +59,6 @@ public class MyFileDatabaseTests {
     Department compSci = new Department("COMS", courses, "Luca Carloni", 2700);
     testMapping = new HashMap<>();
     testMapping.put("COMS", compSci);
-
-    testDatabase = new MyFileDatabase(0, "./data.txt");
-
-    assertNotNull(testDatabase);
   }
 
   @Test
@@ -70,13 +72,15 @@ public class MyFileDatabaseTests {
   @Test
   @Order(2)
   public void toStringTest() {
-    StringBuilder expected = new StringBuilder();
+    StringBuilder concat = new StringBuilder();
     for (Map.Entry<String, Department> entry : testMapping.entrySet()) {
       String key = entry.getKey();
       Department value = entry.getValue();
-      expected.append("For the ").append(key).append(" department: \n").append(value.toString());
+      concat.append("For the ").append(key).append(" department: \n").append(value.toString());
     }
 
+    testDatabase.setMapping(testMapping);
+    String expected = concat.toString();
     String actual = testDatabase.toString();
 
     assertEquals(expected, actual);
@@ -84,5 +88,5 @@ public class MyFileDatabaseTests {
 
 
   public static MyFileDatabase testDatabase;
-  public static HashMap<String, Department> testMapping;
+  public static Map<String, Department> testMapping;
 }

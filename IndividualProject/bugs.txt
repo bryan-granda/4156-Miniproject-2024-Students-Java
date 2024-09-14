@@ -32,6 +32,9 @@ Removed unused HashMap import
 5. line 114
 Fixed the return statement
 
+6. line 37
+Removed minus sign from return value
+
 
 IndividualProjectApplication Class Bugs -
 
@@ -39,4 +42,61 @@ IndividualProjectApplication Class Bugs -
 line 39
 Swapped the position of the literals
 
+MyFileDatabase Class Bugs -
 
+1. LooseCoupling:
+line: 35, 44, 77, 101
+Used interface Map instead of the HashMap
+
+2. ReturnEmptyCollectionRatherThanNull:
+line 54
+Returned an empty Collection instead of Null
+
+
+RouteController Class Bugs -
+
+1. UnnecessaryAnnotationValueElement:
+line 42, 77, 78, 119, 154, 182, 213, 214, 222, 253, 254, 292, 293, 325, 352, 382, 383, 425, 426,427, ,464, 465, 466, 504, 505, 506, 544, 545, 546
+Removed unecessary singular value notations within the parameters
+
+2. LooseCoupling:
+line: 44, 82, 84, 125, 158, 186, 220, 222, 260, 262, 299, 301, 329, 256, 389, 391, 433, 435, 472, 474, 514, 516, 552, 554
+Used interface Map instead of the HashMap
+
+3. unecessaryImport:
+Line 2
+Removed unused HashMap import
+
+4. UseLocaleWithCaseConversions:
+line 47,51
+Passed the Locale.ENGLISH parameter to the toUpperCase method
+
+5.  UnusedLocalVariable:
+line 305
+Used the unused requestedCourse variable in the reponse Entity Object
+
+6. Swapped Http Reponse statuses
+line 49, 51
+Swapped to OK and NOT_FOUND status to return the correct reponse
+
+7. Removed Forbidden Http reponse
+line 92
+Swapped the Forbidden response to the OK response
+
+DepartmentUnitTests Class Bugs -
+
+1. LooseCoupling:
+line: 55, 63
+Used interface Map instead of the HashMap
+
+MyFileDatabaseTests Class Bugs -
+
+1. LooseCoupling:
+line: 44,87
+Used interface Map instead of the HashMap
+
+RouteControllerTests Class Bugs -
+
+1. LooseCoupling:
+line: 154
+Used interface Map instead of the HashMap

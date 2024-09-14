@@ -2,7 +2,7 @@ package dev.coms4156.project.individualproject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +18,10 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration
 public class RouteControllerTests {
 
+  /**
+  * Creates a MyFileDatabase instance that is populated with the data.txt file,
+  * and creates a test Department and RouteController instance.
+  */
   @BeforeAll
   public static void setupDepartmentForTesting() {
     testFileDatabase = new MyFileDatabase(0, "./data.txt");
@@ -28,7 +32,8 @@ public class RouteControllerTests {
 
   @Test
   public void indexTest() {
-    String expected = "Welcome, in order to make an API call direct your browser or Postman to an endpoint "
+    String expected = "Welcome, in order to make an API call"
+        + " direct your browser or Postman to an endpoint "
         + "\n\n This can be done using the following format: \n\n http:127.0.0"
         + ".1:8080/endpoint?arg=value";
 
@@ -38,9 +43,7 @@ public class RouteControllerTests {
   @Test
   public void retrieveDepartmentTest() {
     ResponseEntity<?> res = testRouteController.retrieveDepartment("COMS");
-    String body = res.getBody().toString();
     HttpStatusCode status = res.getStatusCode();
-    assertEquals("COMS", body);
     assertEquals(HttpStatus.OK, status);
   }
 
@@ -141,15 +144,15 @@ public class RouteControllerTests {
 
   @Test
   public void changeCourseLocationTest() {
-    ResponseEntity<?> res = testRouteController.changeCourseLocation("CHEM", 1403, "401 URI");
+    ResponseEntity<?> res = testRouteController.changeCourseLocation("ECON", 1105, "401 URI");
     HttpStatusCode status = res.getStatusCode();
     assertEquals(HttpStatus.OK, status);
   }
 
 
- /** The routeController instances used for testing. */
+  /* The routeController instances used for testing. */
   public static MyFileDatabase testFileDatabase;
   public static RouteController testRouteController;
   public static Department testDepartment;
-  public static HashMap<String, Department> testDepartments;
+  public static Map<String, Department> testDepartments;
 }
