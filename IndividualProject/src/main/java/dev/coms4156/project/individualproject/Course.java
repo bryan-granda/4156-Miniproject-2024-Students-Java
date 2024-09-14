@@ -40,8 +40,7 @@ public class Course implements Serializable {
     if (!isCourseFull) {
       enrolledStudentCount++;
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -56,8 +55,7 @@ public class Course implements Serializable {
     if (!isCourseEmpty) {
       enrolledStudentCount--;
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -95,6 +93,7 @@ public class Course implements Serializable {
    *
    * @return The instructor's name, course location, and course's time slot.
    */
+  @Override
   public String toString() {
     return "\nInstructor: " + instructorName
       + "; Location: " + courseLocation
@@ -145,7 +144,7 @@ public class Course implements Serializable {
    * @return true is course is full, false otherwise.
    */
   public boolean isCourseFull() {
-    return enrollmentCapacity < enrolledStudentCount;
+    return enrollmentCapacity <= enrolledStudentCount;
   }
 
   @Serial
