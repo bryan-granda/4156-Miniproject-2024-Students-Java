@@ -1,6 +1,7 @@
 package dev.coms4156.project.individualproject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -52,6 +53,33 @@ public class RouteControllerTests {
     ResponseEntity<?> res = testRouteController.retrieveCourse("COMS", 1004);
     HttpStatusCode status = res.getStatusCode();
     assertEquals(HttpStatus.OK, status);
+  }
+
+  @Test
+  public void retrieveCoursesTest() {
+    ResponseEntity<?> res = testRouteController.retrieveCourses(3134);
+
+    StringBuilder result = new StringBuilder();
+    for (Map.Entry<String, Department> entry : testDepartments.entrySet()) {
+      Department value = entry.getValue();
+      Map<String, Course> coursesMapping = value.getCourseSelection();
+      Course courseFound;
+      courseFound = coursesMapping.get(Integer.toString(3134));
+      if (courseFound != null) {
+        result.append(courseFound.toString());
+      }
+    }
+
+    String expected = result.toString();
+    String actual = res.getBody().toString();
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void retrieveCoursesFailTest() {
+    ResponseEntity<?> res = testRouteController.retrieveCourses(0);
+    HttpStatusCode status = res.getStatusCode();
+    assertEquals(HttpStatus.NOT_FOUND, status);
   }
 
   @Test
